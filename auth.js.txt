@@ -1,0 +1,59 @@
+// Validate Login and CAPTCHA
+function validateLogin() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let captchaResponse = grecaptcha.getResponse();
+
+    if (!username || !password) {
+        alert("Please enter username and password.");
+        return;
+    }
+    if (!captchaResponse) {
+        alert("Please complete CAPTCHA verification.");
+        return;
+    }
+    
+    // Hide login and show form
+    document.querySelector(".login-container").style.display = "none";
+    document.getElementById("resumeForm").style.display = "block";
+}
+
+// Generate Resume
+function generateResume() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    let address = document.getElementById("address").value;
+    let education = document.getElementById("education").value;
+    let graduationYear = document.getElementById("graduationYear").value;
+    let skills = document.getElementById("skills").value;
+    let experience = document.getElementById("experience").value;
+    let template = document.getElementById("templateSelect").value;
+
+    if (!name || !email || !phone || !skills || !experience) {
+        alert("Please fill out all required fields.");
+        return;
+    }
+
+    let resumeHTML = `
+        <h2 style="color: ${template === 'template3' ? '#4f46e5' : '#000'}">${name}</h2>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Address:</strong> ${address}</p>
+        <p><strong>Education:</strong> ${education}, ${graduationYear}</p>
+        <p><strong>Skills:</strong> ${skills}</p>
+        <p><strong>Experience:</strong> ${experience}</p>
+    `;
+
+    document.getElementById("resumePreview").innerHTML = resumeHTML;
+    document.getElementById("downloadBtn").style.display = "block";
+}
+
+// Download Resume as PDF
+function downloadResume() {
+    let resumeContent = document.getElementById("resumePreview").innerHTML;
+    let newWindow = window.open("", "_blank");
+    newWindow.document.write(`<html><head><title>Resume</title></head><body>${resumeContent}</body></html>`);
+    newWindow.document.close();
+    newWindow.print();
+}

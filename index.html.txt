@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Digital Resume Builder</h1>
+        
+        <div class="login-container">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+            <button onclick="validateLogin()">Login</button>
+        </div>
+        
+        <div class="form-container" id="resumeForm" style="display: none;">
+            <h2>Personal Information</h2>
+            <input type="text" id="name" placeholder="Full Name">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="phone" placeholder="Phone Number">
+            <textarea id="address" placeholder="Address"></textarea>
+            
+            <h2>Educational Details</h2>
+            <input type="text" id="education" placeholder="Degree and Institution">
+            <input type="text" id="graduationYear" placeholder="Graduation Year">
+            
+            <h2>Skills</h2>
+            <textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+            
+            <h2>Work Experience</h2>
+            <textarea id="experience" placeholder="Work Experience"></textarea>
+            
+            <h2>Select Resume Template</h2>
+            <select id="templateSelect">
+                <option value="template1">Classic Template</option>
+                <option value="template2">Modern Template</option>
+                <option value="template3">Indigo Vibrant Template</option>
+            </select>
+            
+            <button onclick="generateResume()">Generate Resume</button>
+        </div>
+        
+        <div id="resumePreview" class="resume-container"></div>
+        <button id="downloadBtn" onclick="downloadResume()" style="display: none;">Download Resume</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
